@@ -6,7 +6,7 @@
 #    By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 09:09:13 by kaheinz           #+#    #+#              #
-#    Updated: 2022/11/02 14:11:57 by kaheinz          ###   ########.fr        #
+#    Updated: 2022/11/22 12:24:08 by kaheinz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,13 +20,10 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror
 
-%.o: %.c
-	$(CC) -Wall -Wextra -Werror -c $< -o $@
-all: $(NAME)
-
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
+all: $(NAME)
 
 clean: 
 	rm -f $(OBJS)
