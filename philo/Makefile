@@ -6,13 +6,13 @@
 #    By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 09:09:13 by kaheinz           #+#    #+#              #
-#    Updated: 2022/11/22 12:24:08 by kaheinz          ###   ########.fr        #
+#    Updated: 2022/11/22 20:05:20 by kaheinz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
-SRCS = main.c
+SRCS = main.c ft_atoi.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -21,7 +21,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) -o -pthread $(NAME) $(OBJS)
 
 all: $(NAME)
 
