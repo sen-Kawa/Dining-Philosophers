@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:48:14 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/22 20:52:36 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/22 21:40:20 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct args
 	int	time_eat;
 	int	time_sleep;
 	int	num_times_eat;
-	int	start_time;
+	unsigned long int	start_time;
 }	t_args;
 
 int			is_digit(char **argv);
@@ -34,5 +34,6 @@ void		argument_converter(int argc, char **argv);
 long int	ft_atoi(const char *str);
 void		print_arg_struct(t_args *args);
 void		correct_input(t_args *args);
+unsigned long int	time_stamp(void);
 
 #endif

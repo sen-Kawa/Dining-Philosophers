@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/22 19:59:57 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/22 21:40:42 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,20 @@ void	argument_converter(int argc, char **argv)
 	args->time_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
 		args->num_times_eat = ft_atoi(argv[5]);
+	args->start_time = time_stamp();
 	correct_input(args);
-//	print_arg_struct(args);
+	print_arg_struct(args);
 	//free args;
 }
 
 void	print_arg_struct(t_args *args)
 {
-	printf("%i", args->num_philo);
-	printf("%i", args->time_die);
-	printf("%i", args->time_eat);
-	printf("%i", args->time_sleep);
-	printf("%i", args->num_times_eat);
+	printf("Num philo %i\n", args->num_philo);
+	printf("Time to die %i\n", args->time_die);
+	printf("Time to eat %i\n", args->time_eat);
+	printf("Time to sleep %i\n", args->time_sleep);
+	printf("Number of times to eat %i\n", args->num_times_eat);
+	printf("Starting time %lu\n", args->start_time);
 }
 
 int	is_digit(char **argv)

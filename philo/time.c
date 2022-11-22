@@ -6,11 +6,13 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 21:06:43 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/22 21:08:24 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/22 21:40:26 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	time()
+#include "philo.h"
+
+unsigned long int	time_stamp(void)
 {
 	struct timeval tv;
 
