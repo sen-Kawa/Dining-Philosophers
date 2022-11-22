@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:48:14 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/22 20:05:43 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/22 20:52:36 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <pthread.h>
+# include <sys/time.h>
 
 typedef struct args
 {
@@ -25,6 +26,7 @@ typedef struct args
 	int	time_eat;
 	int	time_sleep;
 	int	num_times_eat;
+	int	start_time;
 }	t_args;
 
 int			is_digit(char **argv);
