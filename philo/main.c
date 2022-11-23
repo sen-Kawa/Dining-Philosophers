@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/22 21:40:42 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/23 11:50:32 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	correct_input(t_args *args)
 
 void	argument_converter(int argc, char **argv)
 {
-	t_args *args;
+	t_args	*args;
 
 	args = malloc(sizeof(t_args));
 	args->num_philo = ft_atoi(argv[1]);
