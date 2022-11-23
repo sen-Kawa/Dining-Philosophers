@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:48:14 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/22 21:40:20 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/23 18:51:06 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,15 @@ typedef struct args
 	unsigned long int	start_time;
 }	t_args;
 
+typedef struct philo
+{
+	uint32_t	id;
+	pthread_t	thread;
+
+}	t_philo;
+
 int			is_digit(char **argv);
-void		argument_converter(int argc, char **argv);
+t_args		*argument_converter(int argc, char **argv);
 long int	ft_atoi(const char *str);
 void		print_arg_struct(t_args *args);
 void		correct_input(t_args *args);
