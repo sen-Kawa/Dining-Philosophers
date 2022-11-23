@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:48:14 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/23 18:51:06 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/23 18:54:59 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct args
 	int	time_sleep;
 	int	num_times_eat;
 	unsigned long int	start_time;
+	t_philo	**philos;
 }	t_args;
 
 typedef struct philo

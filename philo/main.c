@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/23 18:23:46 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/23 19:02:09 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,14 @@ int	main(int argc, char **argv)
 	else
 	{
 		args = argument_converter(argc, argv);
+		start(args);
 		free(args);
 	}
 	return (0);
 }
 
+void	start(t_args *args)
+{
+	//thread creation in a while loop until num philo
+	
+}
