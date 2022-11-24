@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/24 19:43:59 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/24 21:29:48 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,29 @@ void	start(t_args *args)
 		i++;	
 	}
 	pthread_mutex_destroy(&args->print_mutex);
+	i = 0;
+	while (i < args->num_philo)
+	{
+		pthread_mutex_destroy(&args->fork_mutex[i]);
+		i++;
+	}
 }
 
 void	*routine_philo(void *data)
 {
 	t_philo	*philo;
 	int64_t	current_time;
+	int	r;
+	int	l;
 
 	philo = (t_philo *) data;
+	r = philo->philo_id - 1;
+	l = r - 1;
+	if (philo->philo_id == 1)
+		l = philo->args->num_philo - 1;	
 	current_time = time_stamp();
-
+	pthread_mutex_lock(&philo->args->fork_mutex[r]);
+	pthread_mutex_lock(&philo->args->fork_mutex[l]);
 	pthread_mutex_lock(&philo->args->print_mutex);
 	printf("%lu %i\n", current_time - philo->args->start_time, philo->philo_id);
 	pthread_mutex_unlock(&philo->args->print_mutex);

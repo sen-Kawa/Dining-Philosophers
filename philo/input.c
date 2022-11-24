@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/24 19:42:42 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/24 20:37:09 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,13 @@ t_args	*argument_converter(int argc, char **argv)
 		args->num_times_eat = ft_atoi(argv[5]);
 	args->start_time = 0;
 	pthread_mutex_init(&args->print_mutex, NULL);
+	while (i < args->num_philo)
+	{
+		pthread_mutex_init(&args->fork_mutex[i], NULL);
+		i++;
+	}
 	args->philos = malloc(sizeof(t_philo) * args->num_philo);
+	i = 0;
 	while (i < args->num_philo)
 	{
 		args->philos[i] = malloc(sizeof(t_philo));
