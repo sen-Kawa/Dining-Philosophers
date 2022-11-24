@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/24 17:41:54 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/24 18:06:06 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	*routine_philo(void *data)
 	t_philo	*philo;
 
 	philo = (t_philo *) data;
+	printf("Starting time  in routine %lu\n", philo->args->start_time);
 	printf("philo id routine: %i\n", philo->philo_id);
 	printf("thread id in routine: %lu\n", (unsigned long)philo->thread_id);
 //	printf(".\n");
