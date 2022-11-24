@@ -6,13 +6,13 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/24 14:13:09 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/24 15:23:07 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*routine_philo(void *str);
+void	*routine_philo(void *data);
 
 int	main(int argc, char **argv)
 {
@@ -49,13 +49,19 @@ void	start(t_args *args)
 	while (i < args->num_philo)
 	{
 		pthread_create(&args->philos[i]->thread_id, NULL, &routine_philo, &args->philos[i]);
+		printf("thread id: %lu\n", (unsigned long)args->philos[i]->thread_id);
+		printf("philo id in start: %i\n", args->philos[i]->philo_id);
 		i++;
 	}
 }
 
-void	*routine_philo(void *str)
+void	*routine_philo(void *data)
 {
-	(void) str;
-	printf("in routine.\n");
+	t_philo	*philo;
+
+	philo = (t_philo *) data;
+	printf("philo id: %i\n", philo->philo_id);
+	printf("thread id in routine: %lu\n", (unsigned long)philo->thread_id);
+//	printf(".\n");
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/24 13:00:11 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/24 15:10:27 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ t_args	*argument_converter(int argc, char **argv)
 	{
 		args->philos[i] = malloc(sizeof(t_philo));
 		args->philos[i]->philo_id = i + 1;
+		printf("philo id in init: %i\n", args->philos[i]->philo_id);
 		args->philos[i]->times_eaten = 0;
 		i++;
 	}
-	//initialize each philo structure
 	print_arg_struct(args);
 	return (args);
 }
