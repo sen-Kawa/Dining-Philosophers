@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:48:14 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/24 17:50:36 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/24 19:36:55 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ typedef struct args
 	int	time_eat;
 	int	time_sleep;
 	int	num_times_eat;
-	unsigned long int	start_time;
+	int64_t	start_time;
+	pthread_mutex_t	print_mutex;
 	t_philo	**philos;
 }	t_args;
 
@@ -38,7 +39,6 @@ typedef struct philo
 	int	times_eaten;
 	pthread_t	thread_id;
 	t_args	*args;
-
 }	t_philo;
 
 int			is_digit(char **argv);
@@ -47,6 +47,6 @@ t_args		*argument_converter(int argc, char **argv);
 long int	ft_atoi(const char *str);
 void		print_arg_struct(t_args *args);
 int		correct_input(t_args *args);
-unsigned long int	time_stamp(void);
+int64_t	time_stamp(void);
 
 #endif

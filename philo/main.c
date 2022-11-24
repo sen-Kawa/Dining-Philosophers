@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/24 18:06:06 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/24 19:43:59 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@ void	*routine_philo(void *data);
 int	main(int argc, char **argv)
 {
 	t_args	*args;
-//	t_philo	*philos;
 
 	args = NULL;
-//	philos = NULL;
 	if (argc < 5 || argc > 6)
 	{
 		printf("./philo <#philo> <time_die> <time_eat> <time_sleep> <opt # times_eat>\n");
@@ -45,12 +43,12 @@ void	start(t_args *args)
 {
 	int	i;
 
+	args->start_time = time_stamp();
+	printf("Starting time %lu\n", args->start_time);
 	i = 0;
 	while (i < args->num_philo)
 	{
 		pthread_create(&args->philos[i]->thread_id, NULL, &routine_philo, args->philos[i]);
-//		printf("thread id: %lu\n", (unsigned long)args->philos[i]->thread_id);
-//		printf("philo id in start: %i\n", args->philos[i]->philo_id);
 		i++;
 	}
 	i = 0;
@@ -59,16 +57,22 @@ void	start(t_args *args)
 		pthread_join(args->philos[i]->thread_id, NULL);
 		i++;	
 	}
+	pthread_mutex_destroy(&args->print_mutex);
 }
 
 void	*routine_philo(void *data)
 {
 	t_philo	*philo;
+	int64_t	current_time;
 
 	philo = (t_philo *) data;
-	printf("Starting time  in routine %lu\n", philo->args->start_time);
-	printf("philo id routine: %i\n", philo->philo_id);
-	printf("thread id in routine: %lu\n", (unsigned long)philo->thread_id);
-//	printf(".\n");
+	current_time = time_stamp();
+
+	pthread_mutex_lock(&philo->args->print_mutex);
+	printf("%lu %i\n", current_time - philo->args->start_time, philo->philo_id);
+	pthread_mutex_unlock(&philo->args->print_mutex);
+//	printf("Current time stamp in routine %lu\n", current_time - philo->args->start_time);
+//	printf("philo id routine: %i\n", philo->philo_id);
+//	printf("thread id in routine: %lu\n", (unsigned long)philo->thread_id);
 	return (NULL);
 }
