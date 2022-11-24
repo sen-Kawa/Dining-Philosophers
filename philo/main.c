@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/24 13:02:14 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/24 14:13:09 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,13 @@ int	main(int argc, char **argv)
 void	start(t_args *args)
 {
 	int	i;
-	t_philo	*philos;
 
-	philos = NULL;
 	i = 0;
 	while (i < args->num_philo)
 	{
-		//segfault here
-		pthread_create(&philos[i].thread_id, NULL, &routine_philo, &philos[i]);
-	printf("HERE.\n");
+		pthread_create(&args->philos[i]->thread_id, NULL, &routine_philo, &args->philos[i]);
 		i++;
 	}
-	//thread creation in a while loop until num philo
 }
 
 void	*routine_philo(void *str)
