@@ -6,29 +6,33 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/23 18:21:50 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/24 13:00:11 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	correct_input(t_args *args)
+int	correct_input(t_args *args)
 {
 	if (args->num_philo > 200 || args->num_philo == 0 || args->time_die < 60 || args->time_eat < 60)
 	{
 		printf("Try again with more than 0 but no more than 200 philo, no less than 60 ms time to die or time to eat.\n");
-		return ;
+		return (0);
 	}
-	else if (args->num_philo == 1)
-		printf("Philosopher 1 died.\n");
+//	else if (args->num_philo == 1)
+//		printf("Philosopher 1 died.\n");
 	else
-		printf("goed bezig");
+		return (1);
+//		printf("goed bezig");
 }
 
 t_args	*argument_converter(int argc, char **argv)
 {
 	t_args	*args;
+//	t_philo	*philos;
+	int	i;
 
+	i = 0;
 	args = malloc(sizeof(t_args));
 	args->num_philo = ft_atoi(argv[1]);
 	args->time_die = ft_atoi(argv[2]);
@@ -37,7 +41,15 @@ t_args	*argument_converter(int argc, char **argv)
 	if (argc == 6)
 		args->num_times_eat = ft_atoi(argv[5]);
 	args->start_time = time_stamp();
-	correct_input(args);
+	args->philos = malloc(sizeof(t_philo) * args->num_philo);
+	while (i < args->num_philo)
+	{
+		args->philos[i] = malloc(sizeof(t_philo));
+		args->philos[i]->philo_id = i + 1;
+		args->philos[i]->times_eaten = 0;
+		i++;
+	}
+	//initialize each philo structure
 	print_arg_struct(args);
 	return (args);
 }
