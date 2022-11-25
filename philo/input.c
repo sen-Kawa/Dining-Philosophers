@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/25 12:33:13 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/25 13:04:43 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,17 @@ t_args	*argument_converter(int argc, char **argv)
 		pthread_mutex_init(&args->fork_mutex[i], NULL);
 		i++;
 	}
-	args->philos = malloc(sizeof(t_philo) * args->num_philo);
+	init_philo(args);
+	print_arg_struct(args);
+	return (args);
+}
+
+void	init_philo(t_args *args)
+{
+	int	i;
+
 	i = 0;
+	args->philos = malloc(sizeof(t_philo) * args->num_philo);
 	while (i < args->num_philo)
 	{
 		args->philos[i] = malloc(sizeof(t_philo));
@@ -58,8 +67,6 @@ t_args	*argument_converter(int argc, char **argv)
 		args->philos[i]->args = args;
 		i++;
 	}
-	print_arg_struct(args);
-	return (args);
 }
 
 void	print_arg_struct(t_args *args)
