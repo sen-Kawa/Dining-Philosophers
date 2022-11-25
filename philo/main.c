@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/24 21:29:48 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/25 10:37:37 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	start(t_args *args)
 	int	i;
 
 	args->start_time = time_stamp();
-	printf("Starting time %lu\n", args->start_time);
+	printf("Starting time %lld\n", args->start_time);
 	i = 0;
 	while (i < args->num_philo)
 	{
@@ -69,7 +69,6 @@ void	start(t_args *args)
 void	*routine_philo(void *data)
 {
 	t_philo	*philo;
-	int64_t	current_time;
 	int	r;
 	int	l;
 
@@ -78,14 +77,24 @@ void	*routine_philo(void *data)
 	l = r - 1;
 	if (philo->philo_id == 1)
 		l = philo->args->num_philo - 1;	
-	current_time = time_stamp();
 	pthread_mutex_lock(&philo->args->fork_mutex[r]);
 	pthread_mutex_lock(&philo->args->fork_mutex[l]);
-	pthread_mutex_lock(&philo->args->print_mutex);
-	printf("%lu %i\n", current_time - philo->args->start_time, philo->philo_id);
-	pthread_mutex_unlock(&philo->args->print_mutex);
-//	printf("Current time stamp in routine %lu\n", current_time - philo->args->start_time);
-//	printf("philo id routine: %i\n", philo->philo_id);
-//	printf("thread id in routine: %lu\n", (unsigned long)philo->thread_id);
+	print_message(philo, "has taken a fork");
+	print_message(philo, "is eating");
+	usleep(philo->args->time_eat * 1000);
+	pthread_mutex_unlock(&philo->args->fork_mutex[r]);
+	pthread_mutex_unlock(&philo->args->fork_mutex[l]);
+	print_message(philo, "is sleeping");
+	usleep(philo->args->time_sleep * 1000);
 	return (NULL);
+}
+
+void	print_message(t_philo *philo, char *message)
+{
+	int64_t	current_time;
+
+	current_time = time_stamp();
+	pthread_mutex_lock(&philo->args->print_mutex);
+	printf("%lld %i %s\n", current_time - philo->args->start_time, philo->philo_id, message);
+	pthread_mutex_unlock(&philo->args->print_mutex);
 }
