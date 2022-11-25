@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/25 10:37:37 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/25 10:56:25 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,23 @@ void	start(t_args *args)
 void	*routine_philo(void *data)
 {
 	t_philo	*philo;
+
+	philo = (t_philo *) data;
+	if (philo->args->num_times_eat > 0)
+	{
+		while (philo->times_eaten < philo->args->num_times_eat)
+		{
+			eat_sleep_routine(philo);
+		}
+	}
+	return (NULL);
+}
+
+void	eat_sleep_routine(t_philo *philo)
+{
 	int	r;
 	int	l;
 
-	philo = (t_philo *) data;
 	r = philo->philo_id - 1;
 	l = r - 1;
 	if (philo->philo_id == 1)
@@ -81,12 +94,13 @@ void	*routine_philo(void *data)
 	pthread_mutex_lock(&philo->args->fork_mutex[l]);
 	print_message(philo, "has taken a fork");
 	print_message(philo, "is eating");
+	philo->times_eaten += 1;
 	usleep(philo->args->time_eat * 1000);
 	pthread_mutex_unlock(&philo->args->fork_mutex[r]);
 	pthread_mutex_unlock(&philo->args->fork_mutex[l]);
 	print_message(philo, "is sleeping");
 	usleep(philo->args->time_sleep * 1000);
-	return (NULL);
+	print_message(philo, "woke up");
 }
 
 void	print_message(t_philo *philo, char *message)

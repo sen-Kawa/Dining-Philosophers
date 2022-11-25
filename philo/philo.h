@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:48:14 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/25 10:11:49 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/25 10:56:40 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ void		print_arg_struct(t_args *args);
 int		correct_input(t_args *args);
 int64_t	time_stamp(void);
 void    print_message(t_philo *philo, char *message);
+void    eat_sleep_routine(t_philo *philo);
 
 #endif
