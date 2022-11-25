@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:48:14 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/25 13:10:21 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/25 13:32:37 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct args
 	int				time_sleep;
 	int				num_times_eat;
 	int64_t			start_time;
+	pthread_t		main_thread;
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	*fork_mutex;
 	t_philo			**philos;
@@ -59,6 +60,7 @@ void		print_message(t_philo *philo, char *message);
 void		eat_sleep_routine(t_philo *philo);
 void		thinking_routine(t_philo *philo);
 void		*routine_philo(void *data);
+void		*main_routine(void *data);
 
 //input.c
 t_args		*argument_converter(int argc, char **argv);

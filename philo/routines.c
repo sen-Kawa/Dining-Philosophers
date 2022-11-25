@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/25 13:18:04 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/25 13:32:49 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,17 @@ void	lone_philosopher(t_philo *philo)
 		usleep(philo->args->time_die * 1000);
 		print_message(philo, "died");
 	}
+}
+
+void	*main_routine(void *data)
+{
+	t_args	*args;
+
+	args = (t_args *) data;
+	pthread_mutex_lock(&args->print_mutex);
+	printf("MAIINNNN\n");
+	pthread_mutex_unlock(&args->print_mutex);
+	return (NULL);
 }
 
 void	*routine_philo(void *data)

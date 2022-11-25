@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/25 12:35:10 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/25 13:29:33 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	start(t_args *args)
 	args->start_time = time_stamp();
 	printf("Starting time %lld\n", args->start_time);
 	i = 0;
+	pthread_create(&args->main_thread, NULL, &main_routine, args);
 	while (i < args->num_philo)
 	{
 		pthread_create(&args->philos[i]->thread_id, NULL,
