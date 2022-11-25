@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:48:14 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/25 13:05:05 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/25 13:10:21 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,28 @@ typedef struct philo
 	t_args		*args;
 }	t_philo;
 
-int			is_digit(char **argv);
+//main.c
 void		start(t_args *args);
-t_args		*argument_converter(int argc, char **argv);
+
+//ft_atoi.c
 long int	ft_atoi(const char *str);
-void		print_arg_struct(t_args *args);
-int			correct_input(t_args *args);
+
+//time.c
 int64_t		time_stamp(void);
+
+//print.c
 void		print_message(t_philo *philo, char *message);
+
+//routines.c
 void		eat_sleep_routine(t_philo *philo);
 void		thinking_routine(t_philo *philo);
 void		*routine_philo(void *data);
+
+//input.c
+t_args		*argument_converter(int argc, char **argv);
 void		init_philo(t_args *args);
+int			correct_input(t_args *args);
+int			is_digit(char **argv);
+void		print_arg_struct(t_args *args);
 
 #endif
