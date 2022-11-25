@@ -6,13 +6,13 @@
 #    By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 09:09:13 by kaheinz           #+#    #+#              #
-#    Updated: 2022/11/24 16:06:32 by kaheinz          ###   ########.fr        #
+#    Updated: 2022/11/25 12:29:23 by kaheinz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
-SRCS = main.c ft_atoi.c time.c input.c
+SRCS = main.c ft_atoi.c time.c input.c routines.c print.c
 
 OBJS = $(SRCS:.c=.o)
 

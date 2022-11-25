@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/25 12:05:13 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/25 12:33:13 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,21 @@
 
 int	correct_input(t_args *args)
 {
-	if (args->num_philo > 200 || args->num_philo == 0 || args->time_die < 60 || args->time_eat < 60)
+	if (args->num_philo > 200 || args->num_philo == 0
+		|| args->time_die < 60 || args->time_eat < 60)
 	{
-		printf("Try again with more than 0 but no more than 200 philo, no less than 60 ms time to die or time to eat.\n");
+		printf("Try again with more than 0 but no more than 200 philo,");
+		printf("no less than 60 ms time to die or time to eat.\n");
 		return (0);
 	}
-//	else if (args->num_philo == 1)
-//		printf("Philosopher 1 died.\n");
 	else
 		return (1);
-//		printf("goed bezig");
 }
 
 t_args	*argument_converter(int argc, char **argv)
 {
 	t_args	*args;
-	int	i;
+	int		i;
 
 	i = 0;
 	args = malloc(sizeof(t_args));
@@ -72,7 +71,6 @@ void	print_arg_struct(t_args *args)
 	printf("Time to sleep %i\n", args->time_sleep);
 	printf("Number of times to eat %i\n", args->num_times_eat);
 	printf("\n");
-//	printf("Starting time %lu\n", args->start_time);
 }
 
 int	is_digit(char **argv)
