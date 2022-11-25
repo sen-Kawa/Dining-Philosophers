@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/25 16:04:25 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/25 16:29:48 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	*main_routine(void *data)
 	{
 		current_time = time_stamp() - args->start_time;
 		pthread_mutex_lock(&args->philos[i]->meal_mutex);
-		difference = args->philos[i]->previous_meal - current_time;
+		difference = current_time - args->philos[i]->previous_meal;
 		pthread_mutex_unlock(&args->philos[i]->meal_mutex);
 		if (difference > args->time_die)
 		{
@@ -44,7 +44,9 @@ void	*main_routine(void *data)
 			pthread_mutex_lock(&args->print_mutex);
 			printf("%lld %i DIED---------\n", current_time, i);
 			pthread_mutex_unlock(&args->print_mutex);
+			pthread_mutex_lock(&args->alive_mutex);
 			args->alive = false;
+			pthread_mutex_unlock(&args->alive_mutex);
 			break ;
 		}
 		if (i == args->num_philo - 1)

@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:48:14 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/25 15:58:54 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/25 16:29:02 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct args
 	int64_t			start_time;
 	pthread_t		main_thread;
 	pthread_mutex_t	print_mutex;
+	pthread_mutex_t	alive_mutex;
 	pthread_mutex_t	*fork_mutex;
 	t_philo			**philos;
 }	t_args;
