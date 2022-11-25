@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 21:06:43 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/25 19:19:00 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/25 20:25:31 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,22 @@ void	usleep_philo(t_args *args, int time)
 	end = time_stamp() + time;	
 	while (args->alive == true && time_stamp() < end)
 		usleep(50);
+}
+
+void	death_checker()
+{
+	pthread_mutex_lock(&args->philos[i]->meal_mutex);
+	pthread_mutex_lock(&args->alive_mutex);
+	if (time_stamp() > philo->previous_meal + args->time_die)
+	{
+		args->alive = false;
+		print_message(philo, "died");
+		pthread_mutex_unlock(&args->alive_mutex);
+		pthread_mutex_lock(&args->philos[i]->meal_mutex);
+	}
+	else
+	{
+		pthread_mutex_unlock(&args->alive_mutex);
+		pthread_mutex_lock(&args->philos[i]->meal_mutex);
+	}
 }

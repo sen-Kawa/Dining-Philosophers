@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/25 19:22:45 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/25 20:14:04 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,7 @@ void	*main_routine(void *data)
 void	*routine_philo(void *data)
 {
 	t_philo	*philo;
-//	int64_t	current_time;
 
-//	current_time = time_stamp();
 	philo = (t_philo *) data;
 	lone_philosopher(philo);
 	if (philo->args->num_philo == 1 || philo->args->num_times_eat == 0)
@@ -67,21 +65,12 @@ void	*routine_philo(void *data)
 	if (philo->args->num_times_eat > 0)
 	{
 		while (philo->times_eaten < philo->args->num_times_eat)
-		{
 			eat_sleep_routine(philo);
-			thinking_routine(philo);
-		}
-		pthread_mutex_lock(&philo->args->print_mutex);
-		printf("total times eaten %i\n", philo->times_eaten);
-		pthread_mutex_unlock(&philo->args->print_mutex);
 	}
 	else if (philo->args->num_times_eat == -1)
 	{
 		while (1)
-		{
 			eat_sleep_routine(philo);
-			thinking_routine(philo);
-		}
 	}
 	return (NULL);
 }
@@ -91,9 +80,6 @@ void	thinking_routine(t_philo *philo)
 	int	time_think;
 
 	time_think = 0;
-	//calculation of time to think for buffering
-	//if negative then be it 0
-	//if too big set a max
 	print_message(philo, "is thinking");
 	usleep(time_think * 1000);
 }
@@ -120,4 +106,5 @@ void	eat_sleep_routine(t_philo *philo)
 	pthread_mutex_unlock(&philo->args->fork_mutex[l]);
 	print_message(philo, "is sleeping");
 	usleep_philo(philo->args, philo->args->time_sleep);
+	print_message(philo, "is thinking");
 }
