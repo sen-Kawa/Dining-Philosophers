@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:48:14 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/25 16:29:02 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/25 19:20:21 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ long int	ft_atoi(const char *str);
 
 //time.c
 int64_t		time_stamp(void);
+void		usleep_philo(t_args *args, int time);
 
 //print.c
 void		print_message(t_philo *philo, char *message);

@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/25 19:04:17 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/25 19:22:45 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,9 @@ void	eat_sleep_routine(t_philo *philo)
 	philo->times_eaten += 1;
 	philo->previous_meal = time_stamp();
 	pthread_mutex_unlock(&philo->meal_mutex);
-	usleep(philo->args->time_eat * 1000);
+	usleep_philo(philo->args, philo->args->time_eat);
 	pthread_mutex_unlock(&philo->args->fork_mutex[r]);
 	pthread_mutex_unlock(&philo->args->fork_mutex[l]);
 	print_message(philo, "is sleeping");
-	usleep(philo->args->time_sleep * 1000);
+	usleep_philo(philo->args, philo->args->time_sleep);
 }
