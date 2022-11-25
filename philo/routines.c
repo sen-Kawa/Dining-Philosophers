@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/25 12:38:25 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/25 13:18:04 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 void	lone_philosopher(t_philo *philo)
 {
-	usleep(philo->args->time_die * 1000);
-	print_message(philo, "died");
+	if (philo->args->num_philo == 1)
+	{
+		usleep(philo->args->time_die * 1000);
+		print_message(philo, "died");
+	}
 }
 
 void	*routine_philo(void *data)
@@ -25,12 +28,8 @@ void	*routine_philo(void *data)
 
 	current_time = time_stamp();
 	philo = (t_philo *) data;
-	if (philo->args->num_philo == 1)
-	{
-		lone_philosopher(philo);
-		return (NULL);
-	}
-	if (philo->args->num_times_eat == 0)
+	lone_philosopher(philo);
+	if (philo->args->num_philo == 1 || philo->args->num_times_eat == 0)
 		return (NULL);
 	if (philo->args->num_times_eat > 0)
 	{
@@ -80,8 +79,8 @@ void	eat_sleep_routine(t_philo *philo)
 	print_message(philo, "has taken a fork");
 	print_message(philo, "is eating");
 	philo->times_eaten += 1;
-	philo->previous_meal = time_stamp() - philo->args->start_time;
 	usleep(philo->args->time_eat * 1000);
+	philo->previous_meal = time_stamp() - philo->args->start_time;
 	pthread_mutex_unlock(&philo->args->fork_mutex[r]);
 	pthread_mutex_unlock(&philo->args->fork_mutex[l]);
 	print_message(philo, "is sleeping");
