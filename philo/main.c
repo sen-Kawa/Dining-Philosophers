@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/25 11:49:18 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/25 12:07:06 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ void	eat_sleep_routine(t_philo *philo)
 	print_message(philo, "has taken a fork");
 	print_message(philo, "is eating");
 	philo->times_eaten += 1;
+	philo->previous_meal = time_stamp() - philo->args->start_time;;
 	usleep(philo->args->time_eat * 1000);
 	pthread_mutex_unlock(&philo->args->fork_mutex[r]);
 	pthread_mutex_unlock(&philo->args->fork_mutex[l]);

@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:48:14 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/25 10:56:40 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/25 12:04:35 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct philo
 {
 	int	philo_id;
 	int	times_eaten;
+	int64_t	previous_meal;
 	pthread_t	thread_id;
 	t_args	*args;
 }	t_philo;
