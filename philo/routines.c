@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/25 13:32:49 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/25 14:19:40 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,25 @@ void	lone_philosopher(t_philo *philo)
 void	*main_routine(void *data)
 {
 	t_args	*args;
+	int	i;
+	int64_t	current_time;
 
 	args = (t_args *) data;
-	pthread_mutex_lock(&args->print_mutex);
-	printf("MAIINNNN\n");
-	pthread_mutex_unlock(&args->print_mutex);
+	i = 0;
+	while (1)
+	{
+		current_time = time_stamp() - args->start_time;
+		if ((args->philos[i]->previous_meal - current_time) > args->time_die)
+		{
+			pthread_mutex_lock(&args->print_mutex);
+			printf("%lld %i DIED\n", current_time, i);
+			pthread_mutex_unlock(&args->print_mutex);
+			break ;
+		}
+		if (i == args->num_philo - 1)
+			i = 0;
+		i++;
+	}
 	return (NULL);
 }
 
@@ -46,6 +60,9 @@ void	*routine_philo(void *data)
 	{
 		while (philo->times_eaten < philo->args->num_times_eat)
 		{
+		pthread_mutex_lock(&philo->args->print_mutex);
+		printf("prev meal  %lld of %i\n", philo->previous_meal, philo->philo_id);
+		pthread_mutex_unlock(&philo->args->print_mutex);
 			eat_sleep_routine(philo);
 			thinking_routine(philo);
 		}
