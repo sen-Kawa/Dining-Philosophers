@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/25 17:40:02 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/25 19:04:17 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,18 @@ void	*main_routine(void *data)
 		return (NULL);
 	while (1)
 	{
-		current_time = time_stamp() - args->start_time;
 		pthread_mutex_lock(&args->philos[i]->meal_mutex);
-		difference = current_time - args->philos[i]->previous_meal;
+		difference = time_stamp() - args->philos[i]->previous_meal;
 		pthread_mutex_unlock(&args->philos[i]->meal_mutex);
 		if (difference > args->time_die)
 		{
-			
+			current_time = time_stamp() - args->start_time;
 			pthread_mutex_lock(&args->print_mutex);
-			printf("%ld %i DIED---------\n", current_time, i);
+			printf("%ld %i DIED---------\n", current_time, args->philos[i]->philo_id);
 			pthread_mutex_unlock(&args->print_mutex);
 			pthread_mutex_lock(&args->alive_mutex);
 			args->alive = false;
 			pthread_mutex_unlock(&args->alive_mutex);
-			break ;
 		}
 		if (i == args->num_philo - 1)
 			i = 0;
@@ -68,7 +66,7 @@ void	*routine_philo(void *data)
 		return (NULL);
 	if (philo->args->num_times_eat > 0)
 	{
-		while (philo->times_eaten < philo->args->num_times_eat && philo->args->alive)
+		while (philo->times_eaten < philo->args->num_times_eat)
 		{
 			eat_sleep_routine(philo);
 			thinking_routine(philo);
@@ -79,7 +77,7 @@ void	*routine_philo(void *data)
 	}
 	else if (philo->args->num_times_eat == -1)
 	{
-		while (philo->args->alive)
+		while (1)
 		{
 			eat_sleep_routine(philo);
 			thinking_routine(philo);
@@ -113,11 +111,11 @@ void	eat_sleep_routine(t_philo *philo)
 	pthread_mutex_lock(&philo->args->fork_mutex[l]);
 	print_message(philo, "has taken a fork");
 	print_message(philo, "is eating");
-	philo->times_eaten += 1;
-	usleep(philo->args->time_eat * 1000);
 	pthread_mutex_lock(&philo->meal_mutex);
-	philo->previous_meal = time_stamp() - philo->args->start_time;
+	philo->times_eaten += 1;
+	philo->previous_meal = time_stamp();
 	pthread_mutex_unlock(&philo->meal_mutex);
+	usleep(philo->args->time_eat * 1000);
 	pthread_mutex_unlock(&philo->args->fork_mutex[r]);
 	pthread_mutex_unlock(&philo->args->fork_mutex[l]);
 	print_message(philo, "is sleeping");
