@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/25 11:41:31 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/25 11:49:18 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,9 @@ void	*routine_philo(void *data)
 		{
 			eat_sleep_routine(philo);
 		}
+		pthread_mutex_lock(&philo->args->print_mutex);
+		printf("total times eaten %i\n", philo->times_eaten);
+		pthread_mutex_unlock(&philo->args->print_mutex);
 	}
 /*	else if (philo->args->num_times_eat == -1)
 	{
