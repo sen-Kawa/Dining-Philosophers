@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:48:14 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/25 13:32:37 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/25 15:58:54 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <pthread.h>
 # include <sys/time.h>
+# include <stdbool.h>
 
 typedef struct philo	t_philo;
 
@@ -28,6 +29,7 @@ typedef struct args
 	int				time_eat;
 	int				time_sleep;
 	int				num_times_eat;
+	bool			alive;
 	int64_t			start_time;
 	pthread_t		main_thread;
 	pthread_mutex_t	print_mutex;
@@ -37,11 +39,12 @@ typedef struct args
 
 typedef struct philo
 {
-	int			philo_id;
-	int			times_eaten;
-	int64_t		previous_meal;
-	pthread_t	thread_id;
-	t_args		*args;
+	int				philo_id;
+	int				times_eaten;
+	int64_t			previous_meal;
+	pthread_t		thread_id;
+	pthread_mutex_t	meal_mutex;
+	t_args			*args;
 }	t_philo;
 
 //main.c
