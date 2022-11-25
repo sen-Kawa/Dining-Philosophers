@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/25 16:29:48 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/25 17:40:02 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	*main_routine(void *data)
 		{
 			
 			pthread_mutex_lock(&args->print_mutex);
-			printf("%lld %i DIED---------\n", current_time, i);
+			printf("%ld %i DIED---------\n", current_time, i);
 			pthread_mutex_unlock(&args->print_mutex);
 			pthread_mutex_lock(&args->alive_mutex);
 			args->alive = false;
@@ -59,9 +59,9 @@ void	*main_routine(void *data)
 void	*routine_philo(void *data)
 {
 	t_philo	*philo;
-	int64_t	current_time;
+//	int64_t	current_time;
 
-	current_time = time_stamp();
+//	current_time = time_stamp();
 	philo = (t_philo *) data;
 	lone_philosopher(philo);
 	if (philo->args->num_philo == 1 || philo->args->num_times_eat == 0)
