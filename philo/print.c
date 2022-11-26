@@ -18,7 +18,7 @@ void	print_message(t_philo *philo, char *message)
 
 	current_time = time_stamp();
 	pthread_mutex_lock(&philo->args->print_mutex);
-	printf("%ld %i %s\n", current_time - philo->args->start_time,
+	printf("%lld %i %s\n", current_time - philo->args->start_time,
 		philo->philo_id, message);
 	pthread_mutex_unlock(&philo->args->print_mutex);
 }

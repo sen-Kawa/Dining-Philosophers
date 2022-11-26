@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:48:14 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/25 19:45:55 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/26 20:22:49 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct args
 	int				num_times_eat;
 	bool			alive;
 	int64_t			start_time;
-//	pthread_t		main_thread;
+	pthread_t		main_thread;
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	alive_mutex;
 	pthread_mutex_t	*fork_mutex;
@@ -57,6 +57,7 @@ long int	ft_atoi(const char *str);
 //time.c
 int64_t		time_stamp(void);
 void		usleep_philo(t_args *args, int time);
+void    death_checker(t_args *args, t_philo *philo, int i);
 
 //print.c
 void		print_message(t_philo *philo, char *message);

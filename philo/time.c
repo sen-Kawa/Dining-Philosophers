@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 21:06:43 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/25 20:25:31 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/26 20:47:09 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	usleep_philo(t_args *args, int time)
 		usleep(50);
 }
 
-void	death_checker()
+void	death_checker(t_args *args, t_philo *philo, int i)
 {
 	pthread_mutex_lock(&args->philos[i]->meal_mutex);
 	pthread_mutex_lock(&args->alive_mutex);
@@ -38,11 +38,11 @@ void	death_checker()
 		args->alive = false;
 		print_message(philo, "died");
 		pthread_mutex_unlock(&args->alive_mutex);
-		pthread_mutex_lock(&args->philos[i]->meal_mutex);
+		pthread_mutex_unlock(&args->philos[i]->meal_mutex);
 	}
 	else
 	{
 		pthread_mutex_unlock(&args->alive_mutex);
-		pthread_mutex_lock(&args->philos[i]->meal_mutex);
+		pthread_mutex_unlock(&args->philos[i]->meal_mutex);
 	}
 }

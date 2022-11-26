@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/25 20:14:04 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/26 20:23:58 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,31 +25,18 @@ void	*main_routine(void *data)
 {
 	int		i;
 	t_args	*args;
-	int64_t	current_time;
-	int64_t	difference;
 
-	i = 0;
 	args = (t_args *) data;
 	if (args->num_philo == 1 || args->num_times_eat == 0)
 		return (NULL);
 	while (1)
 	{
-		pthread_mutex_lock(&args->philos[i]->meal_mutex);
-		difference = time_stamp() - args->philos[i]->previous_meal;
-		pthread_mutex_unlock(&args->philos[i]->meal_mutex);
-		if (difference > args->time_die)
+		i = 0;
+		while (i < args->num_philo)
 		{
-			current_time = time_stamp() - args->start_time;
-			pthread_mutex_lock(&args->print_mutex);
-			printf("%ld %i DIED---------\n", current_time, args->philos[i]->philo_id);
-			pthread_mutex_unlock(&args->print_mutex);
-			pthread_mutex_lock(&args->alive_mutex);
-			args->alive = false;
-			pthread_mutex_unlock(&args->alive_mutex);
+			death_checker(args, args->philos[i], i);
+			i++;
 		}
-		if (i == args->num_philo - 1)
-			i = 0;
-		i++;
 	}
 	return (NULL);
 }
