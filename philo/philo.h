@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:48:14 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/26 20:22:49 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/26 22:30:26 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PHILO_H
 
 # include <unistd.h>
+# include <string.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <pthread.h>
@@ -29,9 +30,9 @@ typedef struct args
 	int				time_eat;
 	int				time_sleep;
 	int				num_times_eat;
-	bool			alive;
+	int					alive;
 	int64_t			start_time;
-	pthread_t		main_thread;
+//	pthread_t		main_thread;
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	alive_mutex;
 	pthread_mutex_t	*fork_mutex;
@@ -50,6 +51,7 @@ typedef struct philo
 
 //main.c
 void		start(t_args *args);
+void    joining_threads(t_args *args);
 
 //ft_atoi.c
 long int	ft_atoi(const char *str);
@@ -57,7 +59,7 @@ long int	ft_atoi(const char *str);
 //time.c
 int64_t		time_stamp(void);
 void		usleep_philo(t_args *args, int time);
-void    death_checker(t_args *args, t_philo *philo, int i);
+int    death_checker(t_args *args);
 
 //print.c
 void		print_message(t_philo *philo, char *message);
@@ -67,6 +69,7 @@ void		eat_sleep_routine(t_philo *philo);
 void		thinking_routine(t_philo *philo);
 void		*routine_philo(void *data);
 void		*main_routine(void *data);
+int check_alive(t_args *args);
 
 //input.c
 t_args		*argument_converter(int argc, char **argv);

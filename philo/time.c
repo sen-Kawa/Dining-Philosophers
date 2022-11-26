@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 21:06:43 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/26 20:47:09 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/26 22:34:00 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,41 @@ void	usleep_philo(t_args *args, int time)
 {
 	int64_t	end;
 
+	(void)args;
 	end = time_stamp() + time;	
-	while (args->alive == true && time_stamp() < end)
+	while (time_stamp() < end)
+	{
 		usleep(50);
+	}
 }
 
-void	death_checker(t_args *args, t_philo *philo, int i)
+int	death_checker(t_args *args)
 {
-	pthread_mutex_lock(&args->philos[i]->meal_mutex);
-	pthread_mutex_lock(&args->alive_mutex);
-	if (time_stamp() > philo->previous_meal + args->time_die)
+	int	i;
+
+	while (1)
 	{
-		args->alive = false;
-		print_message(philo, "died");
-		pthread_mutex_unlock(&args->alive_mutex);
-		pthread_mutex_unlock(&args->philos[i]->meal_mutex);
+		i = 0;
+		while (i < args->num_philo)
+		{
+			pthread_mutex_lock(&args->philos[i]->meal_mutex);
+//			pthread_mutex_lock(&args->alive_mutex);
+			if (args->philos[i]->previous_meal > 0 && time_stamp() > args->philos[i]->previous_meal + args->time_die)
+			{
+				print_message(args->philos[i], "diedd");
+				args->alive = 0;
+				joining_threads(args);
+//				pthread_mutex_unlock(&args->alive_mutex);
+				pthread_mutex_unlock(&args->philos[i]->meal_mutex);
+				return (1);
+			}
+			else
+			{
+//				pthread_mutex_unlock(&args->alive_mutex);
+				pthread_mutex_unlock(&args->philos[i]->meal_mutex);
+			}
+			i++;
+		}
 	}
-	else
-	{
-		pthread_mutex_unlock(&args->alive_mutex);
-		pthread_mutex_unlock(&args->philos[i]->meal_mutex);
-	}
+	return (0);
 }

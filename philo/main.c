@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/26 20:13:43 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/26 21:55:15 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,26 +44,39 @@ void	start(t_args *args)
 	args->start_time = time_stamp();
 	printf("Starting time %lld\n", args->start_time);
 	i = 0;
-	pthread_create(&args->main_thread, NULL, &main_routine, args);
+//	pthread_create(&args->main_thread, NULL, &main_routine, args);
 	while (i < args->num_philo)
 	{
 		pthread_create(&args->philos[i]->thread_id, NULL,
 			&routine_philo, args->philos[i]);
 		i++;
 	}
-	i = 0;
-	while (i < args->num_philo)
+	if (args->num_philo > 1)
 	{
-		pthread_join(args->philos[i]->thread_id, NULL);
-		i++;
+		if (!death_checker(args))
+			joining_threads(args);
 	}
-	pthread_join(args->main_thread, NULL);
+	else
+		joining_threads(args);
+//	pthread_join(args->main_thread, NULL);
 	pthread_mutex_destroy(&args->alive_mutex);
 	pthread_mutex_destroy(&args->print_mutex);
 	i = 0;
 	while (i < args->num_philo)
 	{
 		pthread_mutex_destroy(&args->fork_mutex[i]);
+		i++;
+	}
+}
+
+void	joining_threads(t_args *args)
+{
+	int	i;
+
+	i = 0;
+	while (i < args->num_philo)
+	{
+		pthread_join(args->philos[i]->thread_id, NULL);
 		i++;
 	}
 }

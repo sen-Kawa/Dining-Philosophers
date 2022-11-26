@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/25 16:29:22 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/11/26 21:12:51 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ t_args	*argument_converter(int argc, char **argv)
 		i++;
 	}
 	init_philo(args);
-	print_arg_struct(args);
 	return (args);
 }
 
