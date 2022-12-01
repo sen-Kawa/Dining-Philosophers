@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/01 14:00:20 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/01 14:28:53 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,6 @@ void	lone_philosopher(t_philo *philo)
 		usleep(philo->args->time_die * 1000);
 		print_message(philo, "died");
 	}
-}
-
-void	*main_routine(void *data)
-{
-	int		i;
-	t_args	*args;
-
-	args = (t_args *) data;
-	if (args->num_philo == 1 || args->num_times_eat == 0)
-		return (NULL);
-	while (1)
-	{
-		i = 0;
-		while (i < args->num_philo)
-		{
-			death_checker(args);
-			i++;
-		}
-	}
-	return (NULL);
 }
 
 void	*routine_philo(void *data)
@@ -66,19 +46,16 @@ void	thinking_routine(t_philo *philo)
 	usleep(time_think * 1000);
 }
 
-int	check_alive(t_args *args)
+int	check_alive(t_philo *philo)
 {
-	pthread_mutex_lock(&args->alive_mutex);
-	if (args->alive == 1)
+	if ((time_stamp() - philo->previous_meal) > philo->args->time_die)
 	{
+		pthread_mutex_lock(&args->alive_mutex);
+		philo->args->alive == 0;
 		pthread_mutex_unlock(&args->alive_mutex);
 		return (1);
 	}
-	else
-	{
-		pthread_mutex_unlock(&args->alive_mutex);
-		return (0);
-	}
+	return (0);
 }
 
 void	eat_sleep_routine(t_philo *philo)
