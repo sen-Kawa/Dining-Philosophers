@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:48:14 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/01 15:37:47 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/01 16:07:14 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct philo
 //main.c
 void		start(t_args *args);
 void    joining_threads(t_args *args);
-void	clean_mutex(t_args *args);
+void	clean_mutex(t_philo **philo);
 
 //ft_atoi.c
 long int	ft_atoi(const char *str);

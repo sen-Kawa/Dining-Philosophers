@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/01 14:19:18 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/01 16:18:52 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,20 @@ void	start(t_args *args)
 		i++;
 	}
 	joining_threads(args);
-	clean_mutex(args);
+	if (args->alive == 0)
+		clean_mutex(args->philos);
 }
 
-void	clean_mutex(t_args *args)
+void	clean_mutex(t_philo **philo)
 {
 	int	i;
 
 	i = 0;
-	pthread_mutex_destroy(&args->alive_mutex);
-	pthread_mutex_destroy(&args->print_mutex);
-	while (i < args->num_philo)
+//	pthread_mutex_destroy(&args->alive_mutex);
+//	pthread_mutex_destroy(&args->print_mutex);
+	while (i < philo[i]->args->num_philo)
 	{
-		pthread_mutex_destroy(&args->fork_mutex[i]);
+		pthread_mutex_destroy(&philo[i]->args->fork_mutex[philo[i]->l_fork]);
 		i++;
 	}
 }

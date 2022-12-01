@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/01 15:44:02 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/01 16:34:50 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ int	check_alive(t_philo *philo)
 	int	ret;
 
 	ret = 1;
-	pthread_mutex_lock(&args->alive_mutex);
+	pthread_mutex_lock(&philo->args->alive_mutex);
 	if (philo->args->alive == 0)
 		ret = 0;	
-	pthread_mutex_unlock(&args->alive_mutex);
+	pthread_mutex_unlock(&philo->args->alive_mutex);
 	return (ret);
 }
 
@@ -64,19 +64,22 @@ void	eat_sleep_routine(t_philo *philo)
 	t_args	*args;
 
 	args = philo->args;
-	pthread_mutex_lock(&philo->args->fork_mutex[philo->l_fork]);
-	pthread_mutex_lock(&philo->args->fork_mutex[philo->r_fork]);
+	pthread_mutex_lock(&args->fork_mutex[philo->l_fork]);
 	print_message(philo, "has taken a fork");
-	if (check_alive(philo));
+	pthread_mutex_lock(&args->fork_mutex[philo->r_fork]);
+	print_message(philo, "has taken a fork");
+	death_checker(philo);	
 	print_message(philo, "is eating");
-	usleep_philo(philo->args, philo->args->time_eat);
+	usleep_philo(args, args->time_eat);
 	pthread_mutex_lock(&philo->meal_mutex);
 	philo->times_eaten += 1;
 	philo->previous_meal = time_stamp();
 	pthread_mutex_unlock(&philo->meal_mutex);
-	pthread_mutex_unlock(&philo->args->fork_mutex[r]);
-	pthread_mutex_unlock(&philo->args->fork_mutex[l]);
+	pthread_mutex_unlock(&args->fork_mutex[philo->l_fork]);
+	pthread_mutex_unlock(&args->fork_mutex[philo->r_fork]);
+	death_checker(philo);	
 	print_message(philo, "is sleeping");
-	usleep_philo(philo->args, philo->args->time_sleep);
+	usleep_philo(args, args->time_sleep);
 	print_message(philo, "is thinking");
+	death_checker(philo);	
 }
