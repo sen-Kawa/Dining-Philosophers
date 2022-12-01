@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/01 13:59:26 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/01 14:00:20 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,15 +83,9 @@ int	check_alive(t_args *args)
 
 void	eat_sleep_routine(t_philo *philo)
 {
-	int	r;
-	int	l;
 	t_args	*args;
 
 	args = philo->args;
-	r = philo->philo_id - 1;
-	l = r - 1;
-	if (philo->philo_id == 1)
-		l = philo->args->num_philo - 1;
 	while (check_alive(args))
 	{
 	pthread_mutex_lock(&philo->args->fork_mutex[r]);
