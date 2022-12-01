@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/27 00:01:48 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/01 13:43:50 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_args	*argument_converter(int argc, char **argv)
 	args->time_eat = ft_atoi(argv[3]);
 	args->time_sleep = ft_atoi(argv[4]);
 	args->num_times_eat = -1;
-	args->alive = true;
+	args->alive = 1;
 	if (argc == 6)
 		args->num_times_eat = ft_atoi(argv[5]);
 	args->start_time = 0;
@@ -65,6 +65,8 @@ void	init_philo(t_args *args)
 		args->philos[i]->philo_id = i + 1;
 		args->philos[i]->times_eaten = 0;
 		args->philos[i]->previous_meal = 0;
+		args->philos[i]->l_fork = i;
+		args->philos[i]->r_fork = (i + 1) % args->num_philo;
 		pthread_mutex_init(&args->philos[i]->meal_mutex, NULL);
 		args->philos[i]->args = args;
 		i++;
