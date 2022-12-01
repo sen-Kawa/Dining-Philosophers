@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/11/27 00:18:37 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/01 13:59:26 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	*routine_philo(void *data)
 	lone_philosopher(philo);
 	if (args->num_philo == 1 || args->num_times_eat == 0)
 		return (NULL);
+	if (philo->philo_id % 2)
+		usleep(args->time_eat * 500);
 	eat_sleep_routine(philo);
 	return (NULL);
 }
@@ -90,8 +92,6 @@ void	eat_sleep_routine(t_philo *philo)
 	l = r - 1;
 	if (philo->philo_id == 1)
 		l = philo->args->num_philo - 1;
-	if (philo->philo_id % 2)
-		usleep(10 * 1000);
 	while (check_alive(args))
 	{
 	pthread_mutex_lock(&philo->args->fork_mutex[r]);
