@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:48:14 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/01 14:29:02 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/01 14:29:42 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,5 @@ t_args		*argument_converter(int argc, char **argv);
 void		init_philo(t_args *args);
 int			correct_input(t_args *args);
 int			is_digit(char **argv);
-void		print_arg_struct(t_args *args);
 
 #endif

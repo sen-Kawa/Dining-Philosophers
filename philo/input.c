@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/01 13:43:50 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/01 14:29:35 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,6 @@ void	init_philo(t_args *args)
 		args->philos[i]->args = args;
 		i++;
 	}
-}
-
-void	print_arg_struct(t_args *args)
-{
-	printf("GENERAL DATA\n");
-	printf("Num philo %i\n", args->num_philo);
-	printf("Time to die %i\n", args->time_die);
-	printf("Time to eat %i\n", args->time_eat);
-	printf("Time to sleep %i\n", args->time_sleep);
-	printf("Number of times to eat %i\n", args->num_times_eat);
-	printf("\n");
 }
 
 int	is_digit(char **argv)
