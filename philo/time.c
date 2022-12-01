@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 21:06:43 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/01 15:14:20 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/01 15:20:34 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	death_checker(t_philo *philo)
 	if ((time_stamp() - philo->previous_meal) > philo->args->time_die)
 	{
 		pthread_mutex_lock(&args->alive_mutex);
-		philo->args->alive == 0;
+		philo->args->alive = 0;
 		pthread_mutex_unlock(&args->alive_mutex);
 		return (1);
 	}

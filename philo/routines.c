@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/01 14:28:53 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/01 15:20:12 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ void	thinking_routine(t_philo *philo)
 
 int	check_alive(t_philo *philo)
 {
-	if ((time_stamp() - philo->previous_meal) > philo->args->time_die)
-	{
-		pthread_mutex_lock(&args->alive_mutex);
-		philo->args->alive == 0;
-		pthread_mutex_unlock(&args->alive_mutex);
-		return (1);
-	}
-	return (0);
+	int	ret;
+
+	ret = 1;
+	pthread_mutex_lock(&args->alive_mutex);
+	if (philo->args->alive == 0)
+		ret = 0;	
+	pthread_mutex_unlock(&args->alive_mutex);
+	return (ret);
 }
 
 void	eat_sleep_routine(t_philo *philo)
