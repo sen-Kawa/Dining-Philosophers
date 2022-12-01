@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/01 15:37:25 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/01 15:44:02 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,28 +64,19 @@ void	eat_sleep_routine(t_philo *philo)
 	t_args	*args;
 
 	args = philo->args;
-	while (check_alive(args))
-	{
-	pthread_mutex_lock(&philo->args->fork_mutex[r]);
-	pthread_mutex_lock(&philo->args->fork_mutex[l]);
+	pthread_mutex_lock(&philo->args->fork_mutex[philo->l_fork]);
+	pthread_mutex_lock(&philo->args->fork_mutex[philo->r_fork]);
 	print_message(philo, "has taken a fork");
+	if (check_alive(philo));
 	print_message(philo, "is eating");
 	usleep_philo(philo->args, philo->args->time_eat);
 	pthread_mutex_lock(&philo->meal_mutex);
 	philo->times_eaten += 1;
 	philo->previous_meal = time_stamp();
-	if (philo->times_eaten == args->num_times_eat)
-	{
-		pthread_mutex_unlock(&philo->meal_mutex);
-		pthread_mutex_unlock(&philo->args->fork_mutex[r]);
-		pthread_mutex_unlock(&philo->args->fork_mutex[l]);
-		return ;
-	}
 	pthread_mutex_unlock(&philo->meal_mutex);
 	pthread_mutex_unlock(&philo->args->fork_mutex[r]);
 	pthread_mutex_unlock(&philo->args->fork_mutex[l]);
 	print_message(philo, "is sleeping");
 	usleep_philo(philo->args, philo->args->time_sleep);
 	print_message(philo, "is thinking");
-	}
 }
