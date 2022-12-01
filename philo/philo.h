@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:48:14 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/01 13:54:39 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/01 14:26:12 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void		eat_sleep_routine(t_philo *philo);
 void		thinking_routine(t_philo *philo);
 void		*routine_philo(void *data);
 void		*main_routine(void *data);
-int check_alive(t_args *args);
+int check_alive(t_philo *philo);
 
 //input.c
 t_args		*argument_converter(int argc, char **argv);
