@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/01 13:47:51 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/01 13:53:44 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	start(t_args *args)
 
 	args->start_time = time_stamp();
 	i = 0;
-//	pthread_create(&args->main_thread, NULL, &main_routine, args);
 	while (i < args->num_philo)
 	{
 		args->philos[i]->previous_meal = time_stamp();
@@ -51,17 +50,17 @@ void	start(t_args *args)
 			&routine_philo, args->philos[i]);
 		i++;
 	}
-	if (args->num_philo > 1)
-	{
-		if (!death_checker(args))
-			joining_threads(args);
-	}
-	else
-		joining_threads(args);
-//	pthread_join(args->main_thread, NULL);
+	joining_threads(args);
+	clean_mutex(args);
+}
+
+void	clean_mutex(t_args *args)
+{
+	int	i;
+
+	i = 0;
 	pthread_mutex_destroy(&args->alive_mutex);
 	pthread_mutex_destroy(&args->print_mutex);
-	i = 0;
 	while (i < args->num_philo)
 	{
 		pthread_mutex_destroy(&args->fork_mutex[i]);
