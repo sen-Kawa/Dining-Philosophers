@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/01 15:23:26 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/01 15:35:37 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,14 @@ void	*routine_philo(void *data)
 		return (NULL);
 	if (philo->philo_id % 2)
 		usleep(args->time_eat * 500);
+	while (check_alive(philo))
+	{	 
+		if (philo->times_eaten == args->num_times_eat)
+		{
+			print_message(philo, "has eaten enough.");
+			return (0);
+		}
+	}
 	eat_sleep_routine(philo);
 	return (NULL);
 }
