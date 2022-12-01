@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/01 16:18:52 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/01 19:43:52 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	start(t_args *args)
 	joining_threads(args);
 	if (args->alive == 0)
 		clean_mutex(args->philos);
+	pthread_mutex_destroy(&args->alive_mutex);
+//	pthread_mutex_destroy(&args->print_mutex);
 }
 
 void	clean_mutex(t_philo **philo)
@@ -60,8 +62,6 @@ void	clean_mutex(t_philo **philo)
 	int	i;
 
 	i = 0;
-//	pthread_mutex_destroy(&args->alive_mutex);
-//	pthread_mutex_destroy(&args->print_mutex);
 	while (i < philo[i]->args->num_philo)
 	{
 		pthread_mutex_destroy(&philo[i]->args->fork_mutex[philo[i]->l_fork]);
