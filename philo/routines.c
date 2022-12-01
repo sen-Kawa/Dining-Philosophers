@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/01 15:35:37 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/01 15:37:25 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,11 @@ void	*routine_philo(void *data)
 			print_message(philo, "has eaten enough.");
 			return (0);
 		}
+		death_checker(philo);
+		usleep(100);
+		eat_sleep_routine(philo);
 	}
-	eat_sleep_routine(philo);
 	return (NULL);
-}
-
-void	thinking_routine(t_philo *philo)
-{
-	int	time_think;
-
-	time_think = 0;
-	print_message(philo, "is thinking");
-	usleep(time_think * 1000);
 }
 
 int	check_alive(t_philo *philo)
