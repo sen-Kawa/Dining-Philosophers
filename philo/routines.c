@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:32:03 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/05 23:55:27 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/05 23:58:14 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,27 @@ void	actions(t_philo *philo, t_args *args)
 
 void	eating(t_philo *philo, t_args *args)
 {
-	pthread_mutex_lock(&(args->fork_mutex[philo->l_fork]));
+	(void)args;
+//	pthread_mutex_lock(&(args->fork_mutex[philo->l_fork]));
 	print_message(philo, "has taken a fork.");
-	pthread_mutex_lock(&(args->fork_mutex[philo->r_fork]));
+//	pthread_mutex_lock(&(args->fork_mutex[philo->r_fork]));
 	print_message(philo, "has taken a fork.");
 	//eat for time to eat
 	//mutex for time stamp for previous meal
 	//add to times eaten
 	//unlock forks
-	pthread_mutex_unlock(&(args->fork_mutex[philo->l_fork]));
-	pthread_mutex_unlock(&(args->fork_mutex[philo->r_fork]));
+//	pthread_mutex_unlock(&(args->fork_mutex[philo->l_fork]));
+//	pthread_mutex_unlock(&(args->fork_mutex[philo->r_fork]));
 }	
 
 void	sleeping(t_philo *philo, t_args *args)
 {
+	(void)args;
 	print_message(philo, "is sleeping.");
 }
 
 void	thinking(t_philo *philo, t_args *args)
 {
+	(void)args;
 	print_message(philo, "is thinking.");
 }
