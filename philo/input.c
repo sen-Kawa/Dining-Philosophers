@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/05 14:04:37 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/05 14:08:27 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,30 +101,6 @@ int	init_philo(t_args *args)
 		args->philos[i].r_fork = (i + 1) % args->num_philo;
 		args->philos[i].previous_meal = 0;
 		args->philos[i].args = args;
-		i++;
-	}
-	return (1);
-}
-
-int	is_digit(char **argv)
-{
-	int	i;
-	int	c;
-
-	i = 1;
-	while (argv[i])
-	{
-		c = 0;
-		while (argv[i][c])
-		{
-			if (argv[i][c] >= '0' && argv[i][c] <= '9')
-				c++;
-			else
-			{
-				printf("Non numeric argument.\n");
-				return (0);
-			}
-		}
 		i++;
 	}
 	return (1);
