@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:48:14 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/01 19:41:29 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/05 13:12:39 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct args
 //	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	alive_mutex;
 	pthread_mutex_t	*fork_mutex;
-	t_philo			**philos;
+	t_philo			*philos;
 }	t_args;
 
 typedef struct philo
