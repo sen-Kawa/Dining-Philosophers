@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:32:03 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/05 17:04:48 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/05 23:26:58 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,24 +45,4 @@ void	joining_threads(t_args *args)
 		pthread_join(args->philos[i].thread_id, NULL);
 		i++;
 	}
-}
-
-void	*routine(void *data)
-{
-	t_philo	*philo;
-	t_args	*args;
-
-	philo = (t_philo *)data;
-	args = philo->args;
-	if (philo->philo_id % 2 == 0)
-		usleep(args->time_eat * 1000);
-	pthread_mutex_lock(&args->meal_mutex);
-	philo->previous_meal = time_stamp();
-	pthread_mutex_unlock(&args->meal_mutex);
-//	while (1)
-//	{
-		//eat routine
-		print_message(philo, "gotta eat");
-//	}
-	return (0);
 }
