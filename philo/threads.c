@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:32:03 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/05 16:26:27 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/05 16:29:18 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,17 @@ int	create_threads(t_args *args)
 	}
 	//dont forget to join the threads
 	return (0);
+}
+
+void	joining_threads(t_args *args)
+{
+	int	i;
+
+	i = 0;
+	while (i < args->num_philo)
+	{
+		pthread_join()
+	}
 }
 
 void	*routine(void *data)

@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:48:14 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/05 16:23:24 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/05 16:28:04 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ typedef struct philo
 	t_args			*args;
 }	t_philo;
 
-void		joining_threads(t_args *args);
 void		clean_mutex(t_philo **philo);
 
 
@@ -62,7 +61,6 @@ int			death_checker(t_philo *philo);
 
 //routines.c
 void		eat_sleep_routine(t_philo *philo);
-void		*routine(void *data);
 int			check_alive(t_philo *philo);
 
 
@@ -82,6 +80,8 @@ int			is_digit(char **argv);
 
 //threads.c
 int			create_threads(t_args *args);
+void		*routine(void *data);
+void		joining_threads(t_args *args);
 
 int			lone_philosopher(t_args *args);
 
