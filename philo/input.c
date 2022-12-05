@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/05 13:37:29 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/05 13:58:39 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ int	correct_input(t_args *args)
 		return (1);
 }
 
-void	argument_converter(int argc, char **argv, t_args *args)
+int	argument_converter(int argc, char **argv, t_args *args)
 {
+	if (!is_digit(argv))
+		return (0);
 	args->num_philo = ft_atoi(argv[1]);
 	args->time_die = ft_atoi(argv[2]);
 	args->time_eat = ft_atoi(argv[3]);
@@ -36,19 +38,42 @@ void	argument_converter(int argc, char **argv, t_args *args)
 	if (argc == 6)
 		args->num_times_eat = ft_atoi(argv[5]);
 	args->start_time = 0;
+	if (!correct_input(&args));
+		return (0);
+	return (1);
 }
 
-void	mutex_init()
+int	mutex_init(t_args *args)
 {
-	pthread_mutex_init(&args->print_mutex, NULL);
-	pthread_mutex_init(&args->alive_mutex, NULL);
-	pthread_mutex_init(&args->meal_mutex, NULL);
+	if (pthread_mutex_init(&args->print_mutex, NULL) != 0)
+	{
+		printf("Error initializing printing mutex.\n");
+		return (0);
+	}
+	if (pthread_mutex_init(&args->alive_mutex, NULL) != 0)
+	{
+		printf("Error initializing printing mutex.\n");
+		return (0);
+	
+	}
+	if (pthread_mutex_init(&args->meal_mutex, NULL) != 0)
+	{
+		printf("Error initializing meal mutex.\n");
+		return (0);
+	}
 	args->fork_mutex = malloc(sizeof(pthread_mutex_t) * args->num_philo);
+	if (!args->fork_mutex)
+		return (0);
 	while (i < args->num_philo)
 	{
-		pthread_mutex_init(&args->fork_mutex[i], NULL);
+		if (pthread_mutex_init(&(args->fork_mutex[i]), NULL) != 0)
+		{
+			printf("Error initializing fork mutex %i.\n", i);
+			return (0);
+		}
 		i++;
 	}
+	return (1);
 }
 
 int	init_philo(t_args *args)
@@ -58,7 +83,7 @@ int	init_philo(t_args *args)
 	i = 0;
 	args->philos = malloc(sizeof(t_philo) * args->num_philo);
 	if (!args->philos)
-		return (1);
+		return (0);
 	while (i < args->num_philo)
 	{
 		args->philos[i].philo_id = i + 1;
@@ -69,7 +94,7 @@ int	init_philo(t_args *args)
 		args->philos[i].args = args;
 		i++;
 	}
-	return (0);
+	return (1);
 }
 
 int	is_digit(char **argv)
@@ -86,7 +111,10 @@ int	is_digit(char **argv)
 			if (argv[i][c] >= '0' && argv[i][c] <= '9')
 				c++;
 			else
+			{
+				printf("Non numeric argument.\n");
 				return (0);
+			}
 		}
 		i++;
 	}
