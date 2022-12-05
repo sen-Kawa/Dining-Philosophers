@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:32:03 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/06 00:41:05 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/06 00:43:17 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,12 @@ void	joining_threads(t_args *args)
 	}
 }
 
-void	death_checker()
+void	death_checker(t_args *args)
 {
 	while (1)
 	{
+		pthread_mutex_lock(&args->meal_mutex);
+		pthread_mutex_lock(&args->alive_mutex);
 
 	}
 }
