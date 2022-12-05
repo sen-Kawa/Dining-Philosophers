@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:48:14 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/05 13:12:39 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/05 13:14:35 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ typedef struct args
 	int				num_times_eat;
 	int					alive;
 	int64_t			start_time;
-//	pthread_mutex_t	print_mutex;
+	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	alive_mutex;
+	pthread_mutex_t	meal_mutex;
 	pthread_mutex_t	*fork_mutex;
 	t_philo			*philos;
 }	t_args;
@@ -46,7 +47,6 @@ typedef struct philo
 	int				r_fork;
 	int64_t			previous_meal;
 	pthread_t		thread_id;
-	pthread_mutex_t	meal_mutex;
 	t_args			*args;
 }	t_philo;
 
