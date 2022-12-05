@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/05 13:58:39 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/05 14:04:37 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,15 @@ int	argument_converter(int argc, char **argv, t_args *args)
 	if (argc == 6)
 		args->num_times_eat = ft_atoi(argv[5]);
 	args->start_time = 0;
-	if (!correct_input(&args));
+	if (!correct_input(args))
 		return (0);
 	return (1);
 }
 
 int	mutex_init(t_args *args)
 {
+	if (!fork_init(args))
+		return (0);
 	if (pthread_mutex_init(&args->print_mutex, NULL) != 0)
 	{
 		printf("Error initializing printing mutex.\n");
@@ -52,15 +54,22 @@ int	mutex_init(t_args *args)
 	}
 	if (pthread_mutex_init(&args->alive_mutex, NULL) != 0)
 	{
-		printf("Error initializing printing mutex.\n");
+		printf("Error initializing alive mutex.\n");
 		return (0);
-	
 	}
 	if (pthread_mutex_init(&args->meal_mutex, NULL) != 0)
 	{
 		printf("Error initializing meal mutex.\n");
 		return (0);
 	}
+	return (1);
+}
+
+int	fork_init(t_args *args)
+{
+	int	i;
+
+	i = 0;
 	args->fork_mutex = malloc(sizeof(pthread_mutex_t) * args->num_philo);
 	if (!args->fork_mutex)
 		return (0);
