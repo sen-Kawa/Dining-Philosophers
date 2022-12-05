@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/05 14:08:27 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/05 14:59:16 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,8 @@ int	argument_converter(int argc, char **argv, t_args *args)
 	args->time_eat = ft_atoi(argv[3]);
 	args->time_sleep = ft_atoi(argv[4]);
 	args->num_times_eat = -1;
-	args->alive = 1;
 	if (argc == 6)
 		args->num_times_eat = ft_atoi(argv[5]);
-	args->start_time = 0;
 	if (!correct_input(args))
 		return (0);
 	return (1);

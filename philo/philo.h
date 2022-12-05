@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:48:14 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/05 14:40:39 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/05 14:58:26 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct args
 	int				time_sleep;
 	int				num_times_eat;
 	int				alive;
+	int				end;
 	int64_t			start_time;
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	alive_mutex;

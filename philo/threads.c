@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:32:03 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/05 14:38:36 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/05 15:00:13 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,15 @@
 
 int	create_threads(t_args *args)
 {
-	(void)args;
-	printf("not lone");	
+	int	i;
+
+	i = 0;
+	args->end = 0;
+	args->alive = 1;
+	args->start_time = time_stamp();
+	while (i < args->num_philo)
+	{
+
+	}
 	return 0;
 }
