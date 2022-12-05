@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:32:03 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/05 23:42:53 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/05 23:47:58 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ void	*routine(void *data)
 
 void	actions(t_philo *philo, t_args *args)
 {
-	//eating
-	//sleeping
-	//thinking	
+	eating(philo, args);
+	sleeping(philo, args);
+	thinking(philo, args);
 }
 
-void	eating()
+void	eating(t_philo *philo, t_args *args)
 {
 	//grab fork
 	//grab the other damn fork
@@ -48,12 +48,12 @@ void	eating()
 	//unlock forks
 }	
 
-void	sleeping()
+void	sleeping(t_philo *philo, t_args *args)
 {
 
 }
 
-void	thinking()
+void	thinking(t_philo *philo, t_args *args)
 {
 
 }
