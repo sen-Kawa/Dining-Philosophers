@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:32:03 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/06 00:43:17 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/06 00:54:15 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	create_threads(t_args *args)
 		pthread_create(&(args->philos[i].thread_id), NULL, &routine, &(args->philos[i]));
 		i++;
 	}
-	//dead checker
+	death_checker(args);
 	joining_threads(args);
 	return (0);
 }
@@ -54,6 +54,23 @@ void	death_checker(t_args *args)
 	{
 		pthread_mutex_lock(&args->meal_mutex);
 		pthread_mutex_lock(&args->alive_mutex);
-
+		if ((time_stamp() - args->philos->previous_meal) > args->time_die)
+		{
+			print_message(args->philo, "DIED-----------.");
+			args->alive = 0;
+			args->end = 1;
+			pthread_mutex_unlock(&args->meal_mutex);
+			pthread_mutex_unlock(&args->alive_mutex);
+			break ;
+		}
+		pthread_mutex_unlock(&args->meal_mutex);
+		pthread_mutex_unlock(&args->alive_mutex);
+		pthread_mutex_lock(&args->alive_mutex);
+		if (!args->alive)
+		{
+			pthread_mutex_unlock(&args->alive_mutex);
+			break ;
+		}
+		pthread_mutex_unlock(&args->alive_mutex);
 	}
 }
