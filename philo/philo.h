@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:48:14 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/05 15:47:00 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/05 16:23:24 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,6 @@ int64_t		time_stamp(void);
 void		usleep_philo(t_args *args, int time);
 int			death_checker(t_philo *philo);
 
-//print.c
-void		print_message(t_philo *philo, char *message);
-
 //routines.c
 void		eat_sleep_routine(t_philo *philo);
 void		*routine(void *data);
@@ -80,6 +77,7 @@ int			correct_input(t_args *args);
 
 //utils.c
 long int	ft_atoi(const char *str);
+void		print_message(t_philo *philo, char *message);
 int			is_digit(char **argv);
 
 //threads.c
