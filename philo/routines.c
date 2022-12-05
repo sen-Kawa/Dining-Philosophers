@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:32:03 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/05 23:58:14 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/06 00:07:50 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,12 @@ void	eating(t_philo *philo, t_args *args)
 	print_message(philo, "has taken a fork.");
 //	pthread_mutex_lock(&(args->fork_mutex[philo->r_fork]));
 	print_message(philo, "has taken a fork.");
-	//eat for time to eat
+	//eat for time to
+	pthread_mutex_lock(&(args->meal_mutex));
+	philo->previous_meal = time_stamp();
 	//mutex for time stamp for previous meal
+	pthread_mutex_unlock(&(args->meal_mutex));
+	usleep(args->time_eat * 1000);
 	//add to times eaten
 	//unlock forks
 //	pthread_mutex_unlock(&(args->fork_mutex[philo->l_fork]));
