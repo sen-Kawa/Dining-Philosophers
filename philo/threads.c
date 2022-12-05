@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:32:03 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/05 16:07:13 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/05 16:12:44 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	*routine(void *data)
 	while (1)
 	{
 		//eat routine
+		printf("hey");
 	}
 	return (0);
 }

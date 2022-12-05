@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 06:27:47 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/05 16:04:16 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/05 16:16:32 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,12 @@ int	is_digit(char **argv)
 
 void	print_message(t_philo *philo, char *message)
 {
-	pthread_mutex_lock(&args->print_mutex);
-	pthread_mutex_unlock(&args->print_mutex);
+	t_args	*args;
+	int64_t	current_time;
 
+	args = philo->args;
+	current_time = time_stamp() - args->start_time;
+	pthread_mutex_lock(&args->print_mutex);
+	printf("%ld ms %i %s\n", current_time, philo->philo_id, message);
+	pthread_mutex_unlock(&args->print_mutex);
 }

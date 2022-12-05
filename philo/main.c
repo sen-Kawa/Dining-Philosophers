@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/05 15:58:50 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/05 16:16:13 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int	main(int argc, char **argv)
 
 int	lone_philosopher(t_args *args)
 {
+	args->start_time = time_stamp();
 	usleep(args->time_die * 1000);
-	printf("Died.\n");
+	print_message(args->philos, "died");
 	return 0;
 }
