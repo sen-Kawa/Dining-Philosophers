@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:32:03 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/06 00:29:36 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/06 00:32:10 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,7 @@ void	*routine(void *data)
 	while (1)
 	{
 		if (args->num_times_eat == philo->times_eaten)
-		{
-			print_message(philo, "ate enough times.");
 			break ;
-		}
 		actions(philo, args);
 		pthread_mutex_lock(&args->alive_mutex);
 		if (!args->alive)
@@ -46,6 +43,11 @@ void	*routine(void *data)
 void	actions(t_philo *philo, t_args *args)
 {
 	eating(philo, args);
+	if (args->num_times_eat == philo->times_eaten)
+	{
+		print_message(philo, "ate enough times.");
+		return ;
+	}
 	sleeping(philo, args);
 	thinking(philo, args);
 }
