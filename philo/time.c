@@ -1,39 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/05 14:37:31 by kaheinz          ###   ########.fr       */
+/*   Created: 2022/12/05 14:42:41 by kaheinz           #+#    #+#             */
+/*   Updated: 2022/12/05 14:43:16 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char **argv)
+int64_t	time_stamp(void)
 {
-	t_args	args;
-
-	if (argc < 5 || argc > 6)
-		return (1);
-	if (!argument_converter(argc, argv, &args))
-		return (1);
-	if (!init_philo(&args))
-		return (1);
-	if (!mutex_init(&args))
-		return (1);
-	if (args.num_philo == 1)
-		lone_philosopher(&args);
-	else
-		create_threads(&args);
-	return (0);
-}
-
-int	lone_philosopher(t_args *args)
-{
-	usleep(args->time_die * 1000);
-	printf("Died.\n");
-	return 0;
+	
 }

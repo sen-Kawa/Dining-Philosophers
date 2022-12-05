@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:48:14 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/05 14:12:36 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/05 14:40:39 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,9 @@ typedef struct philo
 	t_args			*args;
 }	t_philo;
 
-//main.c
-void		start(t_args *args);
 void		joining_threads(t_args *args);
 void		clean_mutex(t_philo **philo);
 
-//utils.c
-long int	ft_atoi(const char *str);
-int			is_digit(char **argv);
 
 //time.c
 int64_t		time_stamp(void);
@@ -72,11 +67,23 @@ void		eat_sleep_routine(t_philo *philo);
 void		*routine_philo(void *data);
 int			check_alive(t_philo *philo);
 
+
+
+////////////////////
 //input.c
 int			argument_converter(int argc, char **argv, t_args *args);
 int			mutex_init(t_args *args);
 int			fork_init(t_args *args);
 int			init_philo(t_args *args);
 int			correct_input(t_args *args);
+
+//utils.c
+long int	ft_atoi(const char *str);
+int			is_digit(char **argv);
+
+//threads.c
+int			create_threads(t_args *args);
+
+int			lone_philosopher(t_args *args);
 
 #endif
