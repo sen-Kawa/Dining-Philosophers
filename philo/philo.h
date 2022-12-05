@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:48:14 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/05 23:29:02 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/05 23:37:13 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int			create_threads(t_args *args);
 void		joining_threads(t_args *args);
 
 //routines.c
-void		eat_sleep_routine(t_philo *philo, t_args *args);
+void		actions(t_philo *philo, t_args *args);
 void		*routine(void *data);
 
 //time.c
