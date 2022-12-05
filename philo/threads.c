@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:32:03 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/06 00:54:15 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/06 00:55:47 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	death_checker(t_args *args)
 		pthread_mutex_lock(&args->alive_mutex);
 		if ((time_stamp() - args->philos->previous_meal) > args->time_die)
 		{
-			print_message(args->philo, "DIED-----------.");
+			print_message(args->philos, "DIED-----------.");
 			args->alive = 0;
 			args->end = 1;
 			pthread_mutex_unlock(&args->meal_mutex);
