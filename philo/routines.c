@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:32:03 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/06 00:16:07 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/06 00:18:09 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	*routine(void *data)
 	pthread_mutex_unlock(&args->meal_mutex);
 	while (1)
 	{
+		if (args->num_times_eat == philo->times_eaten)
+			break ;
 		actions(philo, args);
 	}
 	return (0);
