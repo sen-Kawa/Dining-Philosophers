@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 06:27:47 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/05 14:11:11 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/05 16:03:25 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,9 @@ int	is_digit(char **argv)
 		i++;
 	}
 	return (1);
+}
+
+void	print_message(t_philo *philo, char *message)
+{
+	
 }

@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:32:03 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/05 15:58:29 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/05 15:59:02 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,5 @@ void	*routine(void *data)
 	pthread_mutex_lock(&args->meal_mutex);
 	philo->previous_meal = time_stamp();
 	pthread_mutex_unlock(&args->meal_mutex);
+	return (0);
 }
