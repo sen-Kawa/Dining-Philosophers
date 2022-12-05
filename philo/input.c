@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/05 13:21:02 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/05 13:37:29 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,6 @@ int	correct_input(t_args *args)
 
 void	argument_converter(int argc, char **argv, t_args *args)
 {
-	int		i;
-
-	i = 0;
-//	args = malloc(sizeof(t_args));
 	args->num_philo = ft_atoi(argv[1]);
 	args->time_die = ft_atoi(argv[2]);
 	args->time_eat = ft_atoi(argv[3]);
@@ -40,36 +36,40 @@ void	argument_converter(int argc, char **argv, t_args *args)
 	if (argc == 6)
 		args->num_times_eat = ft_atoi(argv[5]);
 	args->start_time = 0;
+}
+
+void	mutex_init()
+{
 	pthread_mutex_init(&args->print_mutex, NULL);
-	pthread_mutex_init(&args->meal_mutex, NULL);
 	pthread_mutex_init(&args->alive_mutex, NULL);
+	pthread_mutex_init(&args->meal_mutex, NULL);
 	args->fork_mutex = malloc(sizeof(pthread_mutex_t) * args->num_philo);
 	while (i < args->num_philo)
 	{
 		pthread_mutex_init(&args->fork_mutex[i], NULL);
 		i++;
 	}
-	init_philo(args);
-	return (args);
 }
 
-void	init_philo(t_args *args)
+int	init_philo(t_args *args)
 {
 	int	i;
 
 	i = 0;
 	args->philos = malloc(sizeof(t_philo) * args->num_philo);
+	if (!args->philos)
+		return (1);
 	while (i < args->num_philo)
 	{
-		args->philos[i] = malloc(sizeof(t_philo));
-		args->philos[i]->philo_id = i + 1;
-		args->philos[i]->times_eaten = 0;
-		args->philos[i]->previous_meal = 0;
-		args->philos[i]->l_fork = i;
-		args->philos[i]->r_fork = (i + 1) % args->num_philo;
-		args->philos[i]->args = args;
+		args->philos[i].philo_id = i + 1;
+		args->philos[i].times_eaten = 0;
+		args->philos[i].l_fork = i;
+		args->philos[i].r_fork = (i + 1) % args->num_philo;
+		args->philos[i].previous_meal = 0;
+		args->philos[i].args = args;
 		i++;
 	}
+	return (0);
 }
 
 int	is_digit(char **argv)
