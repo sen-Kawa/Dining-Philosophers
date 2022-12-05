@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/01 19:44:21 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/05 13:21:02 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,12 @@ int	correct_input(t_args *args)
 		return (1);
 }
 
-t_args	*argument_converter(int argc, char **argv)
+void	argument_converter(int argc, char **argv, t_args *args)
 {
-	t_args	*args;
 	int		i;
 
 	i = 0;
-	args = malloc(sizeof(t_args));
+//	args = malloc(sizeof(t_args));
 	args->num_philo = ft_atoi(argv[1]);
 	args->time_die = ft_atoi(argv[2]);
 	args->time_eat = ft_atoi(argv[3]);
@@ -41,7 +40,8 @@ t_args	*argument_converter(int argc, char **argv)
 	if (argc == 6)
 		args->num_times_eat = ft_atoi(argv[5]);
 	args->start_time = 0;
-//	pthread_mutex_init(&args->print_mutex, NULL);
+	pthread_mutex_init(&args->print_mutex, NULL);
+	pthread_mutex_init(&args->meal_mutex, NULL);
 	pthread_mutex_init(&args->alive_mutex, NULL);
 	args->fork_mutex = malloc(sizeof(pthread_mutex_t) * args->num_philo);
 	while (i < args->num_philo)
@@ -67,7 +67,6 @@ void	init_philo(t_args *args)
 		args->philos[i]->previous_meal = 0;
 		args->philos[i]->l_fork = i;
 		args->philos[i]->r_fork = (i + 1) % args->num_philo;
-		pthread_mutex_init(&args->philos[i]->meal_mutex, NULL);
 		args->philos[i]->args = args;
 		i++;
 	}
