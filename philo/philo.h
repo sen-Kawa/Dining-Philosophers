@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:48:14 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/06 00:59:58 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/06 01:23:10 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,7 @@ typedef struct philo
 	t_args			*args;
 }	t_philo;
 
-void		clean_mutex(t_philo **philo);
 
-////////////////////
 //input.c
 int			argument_converter(int argc, char **argv, t_args *args);
 int			mutex_init(t_args *args);
@@ -63,6 +61,7 @@ int			correct_input(t_args *args);
 
 //utils.c
 long int	ft_atoi(const char *str);
+int64_t		time_stamp(void);
 void		print_message(t_philo *philo, char *message);
 int			is_digit(char **argv);
 
@@ -78,9 +77,8 @@ void		eating(t_philo *philo, t_args *args);
 void		thinking(t_philo *philo, t_args *args);
 void		*routine(void *data);
 
-//time.c
-int64_t		time_stamp(void);
-
+//main.c
 int			lone_philosopher(t_args *args);
+void		clean_mutex(t_args *args);
 
 #endif
