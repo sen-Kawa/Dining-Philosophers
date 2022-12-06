@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:32:03 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/06 00:55:47 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/06 01:18:44 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	create_threads(t_args *args)
 	while (i < args->num_philo)
 	{
 		args->philos[i].previous_meal = time_stamp();
-		pthread_create(&(args->philos[i].thread_id), NULL, &routine, &(args->philos[i]));
+		pthread_create(&(args->philos[i].thread_id), NULL, 
+			&routine, &(args->philos[i]));
 		i++;
 	}
 	death_checker(args);
@@ -56,7 +57,8 @@ void	death_checker(t_args *args)
 		pthread_mutex_lock(&args->alive_mutex);
 		if ((time_stamp() - args->philos->previous_meal) > args->time_die)
 		{
-			print_message(args->philos, "DIED-----------.");
+			if (!args->end)
+				print_message(args->philos, "DIED-----------.");
 			args->alive = 0;
 			args->end = 1;
 			pthread_mutex_unlock(&args->meal_mutex);

@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 06:27:47 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/06 01:03:43 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/06 01:18:56 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	print_message(t_philo *philo, char *message)
 	args = philo->args;
 	current_time = time_stamp() - args->start_time;
 	pthread_mutex_lock(&args->print_mutex);
-	if (args->alive && !args->end)
+	if (args->alive)
 		printf("%ld ms %i %s\n", current_time, philo->philo_id, message);
 	pthread_mutex_unlock(&args->print_mutex);
 }
