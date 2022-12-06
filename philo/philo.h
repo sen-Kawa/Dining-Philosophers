@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:48:14 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/06 01:23:10 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/06 16:53:03 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,6 @@ void		*routine(void *data);
 //main.c
 int			lone_philosopher(t_args *args);
 void		clean_mutex(t_args *args);
+void		freeing(t_args *args);
 
 #endif
