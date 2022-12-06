@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 06:27:47 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/06 00:57:54 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/06 01:03:43 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,16 @@ void	print_message(t_philo *philo, char *message)
 
 	args = philo->args;
 	current_time = time_stamp() - args->start_time;
-	//check for alive flag?
 	pthread_mutex_lock(&args->print_mutex);
-	if (args->alive)
+	if (args->alive && !args->end)
 		printf("%ld ms %i %s\n", current_time, philo->philo_id, message);
 	pthread_mutex_unlock(&args->print_mutex);
+}
+
+int64_t	time_stamp(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }

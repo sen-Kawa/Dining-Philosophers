@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:48:14 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/06 00:56:16 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/06 00:59:58 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,6 @@ typedef struct philo
 }	t_philo;
 
 void		clean_mutex(t_philo **philo);
-void		usleep_philo(t_args *args, int time);
-void			death_checker(t_args *args);
-int			check_alive(t_philo *philo);
 
 ////////////////////
 //input.c
@@ -72,6 +69,7 @@ int			is_digit(char **argv);
 //threads.c
 int			create_threads(t_args *args);
 void		joining_threads(t_args *args);
+void		death_checker(t_args *args);
 
 //routines.c
 void		actions(t_philo *philo, t_args *args);

@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:32:03 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/06 00:32:10 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/06 01:04:33 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	actions(t_philo *philo, t_args *args)
 	if (args->num_times_eat == philo->times_eaten)
 	{
 		print_message(philo, "ate enough times.");
+		args->end = 1;
 		return ;
 	}
 	sleeping(philo, args);
