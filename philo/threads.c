@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:32:03 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/06 01:18:44 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/06 01:20:01 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	create_threads(t_args *args)
 	while (i < args->num_philo)
 	{
 		args->philos[i].previous_meal = time_stamp();
-		pthread_create(&(args->philos[i].thread_id), NULL, 
+		pthread_create(&(args->philos[i].thread_id), NULL,
 			&routine, &(args->philos[i]));
 		i++;
 	}

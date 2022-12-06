@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/05 17:04:46 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/06 01:20:25 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,5 @@ int	lone_philosopher(t_args *args)
 {
 	usleep(args->time_die * 1000);
 	print_message(args->philos, "died");
-	return 0;
+	return (0);
 }
