@@ -6,11 +6,13 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:32:03 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/06 15:59:55 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/06 17:00:48 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static void	lock_function(t_args *args, int lock);
 
 int	create_threads(t_args *args)
 {
@@ -53,8 +55,7 @@ void	death_checker(t_args *args)
 {
 	while (1)
 	{
-		pthread_mutex_lock(&args->meal_mutex);
-		pthread_mutex_lock(&args->alive_mutex);
+		lock_function(args, 1);
 		if ((time_stamp() - args->philos->previous_meal) > args->time_die)
 		{
 			if (!args->end)
@@ -62,22 +63,33 @@ void	death_checker(t_args *args)
 				pthread_mutex_unlock(&args->alive_mutex);
 				print_message(args->philos, "died.");
 				pthread_mutex_lock(&args->alive_mutex);
-
 			}
 			args->alive = 0;
 			args->end = 1;
-			pthread_mutex_unlock(&args->meal_mutex);
-			pthread_mutex_unlock(&args->alive_mutex);
+			lock_function(args, 2);
 			break ;
 		}
-		pthread_mutex_unlock(&args->meal_mutex);
-		pthread_mutex_unlock(&args->alive_mutex);
+		lock_function(args, 2);
 		pthread_mutex_lock(&args->alive_mutex);
 		if (!args->alive)
 		{
 			pthread_mutex_unlock(&args->alive_mutex);
 			break ;
 		}
+		pthread_mutex_unlock(&args->alive_mutex);
+	}
+}
+
+static void	lock_function(t_args *args, int lock)
+{
+	if (lock == 1)
+	{
+		pthread_mutex_lock(&args->meal_mutex);
+		pthread_mutex_lock(&args->alive_mutex);
+	}
+	else if (lock == 2)
+	{
+		pthread_mutex_unlock(&args->meal_mutex);
 		pthread_mutex_unlock(&args->alive_mutex);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:48:14 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/06 16:53:03 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/06 16:55:38 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ typedef struct philo
 	pthread_t		thread_id;
 	t_args			*args;
 }	t_philo;
-
 
 //input.c
 int			argument_converter(int argc, char **argv, t_args *args);
