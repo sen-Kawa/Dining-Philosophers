@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:34:25 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/06 14:03:13 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/06 16:36:13 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 		return (1);
 	create_threads(&args);
 //	clean_mutex(&args);
-	//free?
+	//free philos and fork mutexes
 	return (0);
 }
 
